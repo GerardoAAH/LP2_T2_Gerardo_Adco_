@@ -24,6 +24,7 @@ public class EmpleadoController {
 	@Autowired
 	private AreaService areaService;
 	
+	//Lista
 	@GetMapping("/listar")
 	public String listarEmpleados(Model model) {
         List<EmpleadoEntity> empleados = empleadoService.obtenerTodosEmpleados();
@@ -40,12 +41,13 @@ public class EmpleadoController {
         model.addAttribute("areas", areas);
         return "registrar_empleado"; 
     }
-    
+    //Sirve para los dos formularios de registro y editar
     @PostMapping("/guardar")
     public String guardarEmpleado(@ModelAttribute("empleado") EmpleadoEntity empleado) {
         empleadoService.guardarActualizarEmpleado(empleado);
         return "redirect:/listar"; 
     }
+    
     
     @GetMapping("/editar/{dni}")
     public String showFormularioEditar(@PathVariable("dni") String dni, Model model) {
@@ -56,6 +58,7 @@ public class EmpleadoController {
         return "editar_empleado"; 
     }
     
+    //Eliminar
     @GetMapping("/eliminar/{dni}")
     public String eliminarEmpleado(@PathVariable("dni") String dni) {
         empleadoService.eliminarEmpleado(dni);
